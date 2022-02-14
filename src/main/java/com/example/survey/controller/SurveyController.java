@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,19 @@ public class SurveyController {
     @PostMapping("/surveys")
     public Survey createSurvey(@RequestBody Survey survey) {
         return surveyRepository.save(survey);
+    }
+
+    // Update View
+    @PutMapping("/surveys/{id}")
+    public ResponseEntity<Survey> updateSurvey(@PathVariable Long id, @RequestBody Survey data) {
+        Survey survey = surveyRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Survey not exist with id:" + id));
+
+        survey.setSurvey(data.getSurvey());
+        survey.setDescription(data.getDescription());
+
+        Survey updatedData = surveyRepository.save(survey);
+        return ResponseEntity.ok(updatedData);
     }
 
 }
