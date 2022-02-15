@@ -2,6 +2,7 @@ package com.example.survey.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,17 +25,21 @@ public class Survey {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "survey")
+    @OneToMany(mappedBy = "survey", cascade = CascadeType.REMOVE)
     private List<Question> questions;
+
+    @OneToMany(mappedBy = "survey", cascade = CascadeType.REMOVE)
+    private List<UserResponse> userResponses;
 
     public Survey() {
 
     }
 
-    public Survey(String survey, String description, List<Question> questions) {
+    public Survey(String survey, String description, List<Question> questions, List<UserResponse> userResponses) {
         this.survey = survey;
         this.description = description;
         this.questions = questions;
+        this.userResponses = userResponses;
     }
 
     public long getId() {
@@ -67,6 +72,14 @@ public class Survey {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public List<UserResponse> getUserResponses() {
+        return userResponses;
+    }
+
+    public void setUserResponses(List<UserResponse> userResponses) {
+        this.userResponses = userResponses;
     }
 
 }

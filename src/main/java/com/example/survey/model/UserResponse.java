@@ -16,32 +16,30 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "questions")
-public class Question {
-
+@Table(name = "userResponses")
+public class UserResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "question")
-    private String question;
+    @Column(name = "email")
+    private String email;
 
     @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "survey_id")
     private Survey survey;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-    private List<Answer> answers;
+    @OneToMany(mappedBy = "userResponse", cascade = CascadeType.REMOVE)
+    private List<Response> responses;
 
-    public Question() {
-
+    public UserResponse() {
     }
 
-    public Question(String question, Survey survey, List<Answer> answers) {
-        this.question = question;
+    public UserResponse(String email, Survey survey, List<Response> responses) {
+        this.email = email;
         this.survey = survey;
-        this.answers = answers;
+        this.responses = responses;
     }
 
     public long getId() {
@@ -52,12 +50,12 @@ public class Question {
         this.id = id;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getEmail() {
+        return email;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Survey getSurvey() {
@@ -68,12 +66,12 @@ public class Question {
         this.survey = survey;
     }
 
-    public List<Answer> getAnswers() {
-        return answers;
+    public List<Response> getResponses() {
+        return responses;
     }
 
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
+    public void setResponses(List<Response> responses) {
+        this.responses = responses;
     }
 
 }
