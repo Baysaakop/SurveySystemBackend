@@ -34,14 +34,19 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answers;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    private List<Response> responses;
+
     public Question() {
 
     }
 
-    public Question(String question, Survey survey, List<Answer> answers) {
+    public Question(String question, Survey survey, List<Answer> answers, List<Response> responses) {
         this.question = question;
         this.survey = survey;
         this.answers = answers;
+        this.responses = responses;
     }
 
     public long getId() {
@@ -74,6 +79,14 @@ public class Question {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    public List<Response> getResponses() {
+        return responses;
+    }
+
+    public void setResponses(List<Response> responses) {
+        this.responses = responses;
     }
 
 }

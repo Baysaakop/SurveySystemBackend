@@ -8,8 +8,6 @@ import com.example.survey.repository.ResponseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,11 +23,5 @@ public class ResponseController {
     @GetMapping("/responses")
     public List<Response> getAllSurveys() {
         return responseRepository.findAll();
-    }
-
-    // CREATE VIEW
-    @PostMapping("/responses")
-    public Response createResponse(@RequestBody Response response) {
-        return responseRepository.save(response);
     }
 }

@@ -17,19 +17,17 @@ public class Response {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "question_id")
     private Question question;
 
-    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "answer_id")
     private Answer answer;
 
     @JsonIgnore
     @ManyToOne()
-    @JoinColumn(name = "userResponse_id")
+    @JoinColumn(name = "user_response_id")
     private UserResponse userResponse;
 
     public Response() {
